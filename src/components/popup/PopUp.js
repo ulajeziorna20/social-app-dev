@@ -6,7 +6,7 @@ const PopUp = (showPopUp) => {
 
   return (
     <>
-      <section className={`${!showPopUp ? '' : 'active'}   popup`}>
+      <section className={`${showPopUp ? '' : 'active'} popup`}>
         <div className='login-popup'>
           <div className='popup-box solid'>
             <form className='form'>
