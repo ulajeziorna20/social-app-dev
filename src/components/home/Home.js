@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
+
 import './Home.css'
 import { Link } from 'react-router-dom'
-import PopUp from '../popup/PopUp'
+
+import PopUp from '../popup/Popup'
 
 const Home = () => {
   const [showPopUp, setShowPopUp] = useState(false)
@@ -16,7 +18,6 @@ const Home = () => {
     let timeId = setTimeout(() => {
       PopUpStatusChange()
     }, 10000)
-    console.log(`ula`)
 
     return () => {
       clearTimeout(timeId)
@@ -42,7 +43,6 @@ const Home = () => {
       <header className='header'>
         <h1 className='main-title'>Social App</h1>
       </header>
-
 
       <PopUp showPopUp={showPopUp} />
 
