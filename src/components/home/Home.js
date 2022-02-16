@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import './Home.css'
 import { Link } from 'react-router-dom'
 
-import Popup from '../popup/Pop-up'
+import Popup from '../popup/Popup'
 
 const Home = () => {
   const [showPopUp, setShowPopUp] = useState(false)
