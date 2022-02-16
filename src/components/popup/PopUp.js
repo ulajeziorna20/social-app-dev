@@ -1,6 +1,6 @@
-import './PopUp.css'
+import './Popup.css'
 
-const PopUp = (showPopUp) => {
+const Popup = (showPopUp) => {
   return (
     <>
       <section className={`${showPopUp ? '' : 'active'} popup`}>
@@ -26,4 +26,4 @@ const PopUp = (showPopUp) => {
   )
 }
 
-export default PopUp
+export default Popup

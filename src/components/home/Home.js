@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import './Home.css'
 import { Link } from 'react-router-dom'
 
-import PopUp from '../popup/Popup'
+import Popup from '../popup/Popup'
 
 const Home = () => {
   const [showPopUp, setShowPopUp] = useState(false)
@@ -44,7 +44,7 @@ const Home = () => {
         <h1 className='main-title'>Social App</h1>
       </header>
 
-      <PopUp showPopUp={showPopUp} />
+      <Popup showPopUp={showPopUp} />
 
       <section className='welcome-section'>
         <h3 className='welcome-section-header'>Do you want to join them?</h3>
