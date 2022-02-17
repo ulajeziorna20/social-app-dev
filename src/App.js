@@ -13,6 +13,11 @@ const App = () => {
       <nav className='nav'>
         <ul>
           <li className='nav-item'>
+            <Link to='/' className='link'>
+              Home
+            </Link>
+          </li>
+          <li className='nav-item'>
             <Link to='/signup' className='link'>
               Sign Up!
             </Link>
@@ -20,11 +25,6 @@ const App = () => {
           <li className='nav-item'>
             <Link to='/login' className='link'>
               Login
-            </Link>
-          </li>
-          <li className='nav-item'>
-            <Link to='/' className='link'>
-              Home
             </Link>
           </li>
         </ul>
