@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
 import './Home.css'
-import { Link } from 'react-router-dom'
 
 import Popup from '../popup/Popup'
 
@@ -26,20 +25,6 @@ const Home = () => {
 
   return (
     <>
-      <nav className='nav'>
-        <ul>
-          <li className='nav-item'>
-            <Link to='/signup' className='link'>
-              Sign Up!
-            </Link>
-          </li>
-          <li className='nav-item'>
-            <Link to='/login' className='link'>
-              Login
-            </Link>
-          </li>
-        </ul>
-      </nav>
       <header className='header'>
         <h1 className='main-title'>Social App</h1>
       </header>
