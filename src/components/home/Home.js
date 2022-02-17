@@ -29,7 +29,7 @@ const Home = () => {
       <nav className='nav'>
         <ul>
           <li className='nav-item'>
-            <Link to='/sign-up' className='link'>
+            <Link to='/signup' className='link'>
               Sign Up!
             </Link>
           </li>
