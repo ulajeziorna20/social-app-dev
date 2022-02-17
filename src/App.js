@@ -22,6 +22,11 @@ const App = () => {
               Login
             </Link>
           </li>
+          <li className='nav-item'>
+            <Link to='/' className='link'>
+              Home
+            </Link>
+          </li>
         </ul>
       </nav>
       <img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/moon2.png' alt='fgerger' />
