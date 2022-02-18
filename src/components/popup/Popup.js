@@ -1,10 +1,13 @@
 import './Popup.css'
 
-const Popup = (showPopUp) => {
+import { Link } from 'react-router-dom'
+
+const Popup = (props) => {
   return (
     <>
-      <section className={`${showPopUp ? '' : 'active'} popup`}>
+      <section className='active'>
         <div className='login-popup'>
+          <div className='closeBtn'>. X .</div>
           <div className='popup-box solid'>
             <form className='form'>
               <h1 className='login-header'>Sign in!</h1>
@@ -19,6 +22,9 @@ const Popup = (showPopUp) => {
               <br />
               <input type='submit' value='LOGIN' className='login-btn' />
             </form>
+            <Link to='/sign-up' className='link'>
+              Sign Up!
+            </Link>
           </div>
         </div>
       </section>

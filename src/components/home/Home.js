@@ -16,12 +16,16 @@ const Home = () => {
 
     let timeId = setTimeout(() => {
       PopUpStatusChange()
-    }, 10000)
+    }, 5000)
 
     return () => {
       clearTimeout(timeId)
     }
-  }, [showPopUp])
+  }, [])
+
+  const closePopup = () => {
+    setShowPopUp(false)
+  }
 
   return (
     <>
@@ -29,7 +33,7 @@ const Home = () => {
         <h1 className='main-title'>Social App</h1>
       </header>
 
-      <Popup showPopUp={showPopUp} />
+      {showPopUp === false ? '' : <Popup closePopup={closePopup} />}
 
       <section className='welcome-section'>
         <h3 className='welcome-section-header'>Do you want to join them?</h3>
