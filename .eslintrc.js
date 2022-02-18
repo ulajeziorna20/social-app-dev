@@ -2,7 +2,8 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
-    jest: true
+    jest: true,
+    node: true
   },
   extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:prettier/recommended'],
   parserOptions: {
@@ -29,6 +30,10 @@ module.exports = {
     'import/order': [
       'error',
       {
+        'alphabetize': {
+          order: 'asc',
+          caseInsensitive: true
+        },
         'groups': ['builtin', 'external', 'internal'],
         'pathGroups': [
           {
@@ -38,11 +43,7 @@ module.exports = {
           }
         ],
         'pathGroupsExcludedImportTypes': ['react'],
-        'newlines-between': 'always',
-        'alphabetize': {
-          order: 'asc',
-          caseInsensitive: true
-        }
+        'newlines-between': 'always'
       }
     ],
     'prettier/prettier': 'error',
