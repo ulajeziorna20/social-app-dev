@@ -7,7 +7,7 @@ const Popup = (props) => {
     <>
       <section className='active'>
         <div className='login-popup'>
-          <div className='closeBtn'>. X .</div>
+          <div className='closeBtn' onClick={props.closePopup}>close</div>
           <div className='popup-box solid'>
             <form className='form'>
               <h1 className='login-header'>Sign in!</h1>
