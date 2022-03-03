@@ -5,7 +5,7 @@ import './Home.css'
 import Popup from '../popup/Popup'
 
 const Home = () => {
-  const [showPopup, setShowPopup] = useState(false)
+  const [showPopup, setShowPopup] = useState(true)
 
   // On componentDidMount set the timer
 
@@ -24,7 +24,7 @@ const Home = () => {
   }, [])
 
   const closePopup = () => {
-    setShowPopup(false)
+    setShowPopup(true)
   }
 
   return (
@@ -33,7 +33,7 @@ const Home = () => {
         <h1 className='main-title'>Social App</h1>
       </header>
 
-      {showPopup === false ? '' : <Popup closePopup={closePopup} />}
+      {showPopup ? '' : <Popup closePopup={closePopup} />}
 
       <section className='welcome-section'>
         <h3 className='welcome-section-header'>Do you want to join them?</h3>
