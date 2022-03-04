@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import './Home.css'
 
+import FeedNoLogin from '../feed/feed-no-login/FeedNoLogin'
 import Popup from '../popup/Popup'
 
 const Home = () => {
@@ -9,19 +10,19 @@ const Home = () => {
 
   // On componentDidMount set the timer
 
-  useEffect(() => {
-    const PopUpStatusChange = () => {
-      setShowPopUp(!showPopUp)
-    }
+  // useEffect(() => {
+  //   const PopUpStatusChange = () => {
+  //     setShowPopUp(!showPopUp)
+  //   }
 
-    let timeId = setTimeout(() => {
-      PopUpStatusChange()
-    }, 10000)
+  //   let timeId = setTimeout(() => {
+  //     PopUpStatusChange()
+  //   }, 10000)
 
-    return () => {
-      clearTimeout(timeId)
-    }
-  }, [showPopUp])
+  //   return () => {
+  //     clearTimeout(timeId)
+  //   }
+  // }, [showPopUp])
 
   return (
     <>
@@ -29,13 +30,14 @@ const Home = () => {
         <h1 className='main-title'>Social App</h1>
       </header>
 
-      <Popup showPopUp={showPopUp} />
+      {/* <Popup showPopUp={showPopUp} /> */}
 
       <section className='welcome-section'>
         <h3 className='welcome-section-header'>Do you want to join them?</h3>
 
         <div className='feed-container'>
           <figure className='main-feed'>[feed other users]</figure>
+          <FeedNoLogin />
         </div>
       </section>
 
