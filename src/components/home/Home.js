@@ -5,23 +5,27 @@ import './Home.css'
 import Popup from '../popup/Popup'
 
 const Home = () => {
-  const [showPopUp, setShowPopUp] = useState(false)
+  const [showPopup, setShowPopup] = useState(true)
 
   // On componentDidMount set the timer
 
   useEffect(() => {
     const PopUpStatusChange = () => {
-      setShowPopUp(!showPopUp)
+      setShowPopup(!showPopup)
     }
 
     let timeId = setTimeout(() => {
       PopUpStatusChange()
-    }, 10000)
+    }, 5000)
 
     return () => {
       clearTimeout(timeId)
     }
-  }, [showPopUp])
+  }, [])
+
+  const closePopup = () => {
+    setShowPopup(true)
+  }
 
   return (
     <>
@@ -29,7 +33,7 @@ const Home = () => {
         <h1 className='main-title'>Social App</h1>
       </header>
 
-      <Popup showPopUp={showPopUp} />
+      {showPopup ? '' : <Popup closePopup={closePopup} />}
 
       <section className='welcome-section'>
         <h3 className='welcome-section-header'>Do you want to join them?</h3>

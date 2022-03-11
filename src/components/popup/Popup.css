@@ -11,17 +11,26 @@
   z-index: 7;
 } */
 
-
-.popup {
+/* .popup {
   display: none;
   position: fixed;
   z-index: -6;
   background-color: burlywood;
+} */
+
+.active {
+  position: fixed;
+  display: block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  z-index: 199;
+  background-color: rgb(144, 177, 182);
 }
 
-.active.popup {
-  display: block;
-  z-index: 0;
-  left: 40%;
-
+.closeBtn {
+  position: absolute;
+  right: 10px;
+  top: 8px;
 }
