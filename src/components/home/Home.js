@@ -5,7 +5,6 @@ import './Home.css'
 import FeedNoLogin from '../feed/feed-no-login/FeedNoLogin'
 import Popup from '../popup/Popup'
 
-
 const Home = () => {
   const [showPopup, setShowPopup] = useState(true)
 
