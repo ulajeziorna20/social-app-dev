@@ -46,11 +46,12 @@ module.exports = {
         'newlines-between': 'always'
       }
     ],
-    'prettier/prettier': 'error',
-    'react/react-in-jsx-scope': 'off',
     'no-console': 'warn',
     'no-alert': 'warn',
     'no-unused-vars': 'off',
+    'react/prop-types': 'off',
+    'prettier/prettier': 'error',
+    'react/react-in-jsx-scope': 'off',
     'react-hooks/rules-of-hooks': 'error',
     'unused-imports/no-unused-imports': 'warn',
     'unused-imports/no-unused-vars': [
