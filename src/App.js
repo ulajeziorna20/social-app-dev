@@ -40,6 +40,7 @@ const App = () => {
           <Route path='login' element={<Login />} />
         </Routes>
       </div>
+      <footer className='footer'>© 2022 by Jeziorna Urszula Inc.</footer>
     </div>
   )
 }

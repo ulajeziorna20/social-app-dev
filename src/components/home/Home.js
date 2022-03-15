@@ -2,13 +2,11 @@ import React, { useState, useEffect } from 'react'
 
 import './Home.css'
 
-// import FeedNoLogin from '../feed/feed-no-login/FeedNoLogin'
+import FeedNoLogin from '../feed/feed-no-login/FeedNoLogin'
 import Popup from '../popup/Popup'
 
 const Home = () => {
   const [showPopup, setShowPopup] = useState(true)
-
-  // On componentDidMount set the timer
 
   useEffect(() => {
     const PopUpStatusChange = () => {
@@ -39,13 +37,10 @@ const Home = () => {
       <section className='welcome-section'>
         <h3 className='welcome-section-header'>Do you want to join them?</h3>
 
-        {/* <div className='feed-container'>
-          <figure className='main-feed'>[feed other users]</figure>
+        <div className='feed-container'>
           <FeedNoLogin />
-        </div> */}
+        </div>
       </section>
-
-      <footer className='footer'>© 2022 by Jeziorna Urszula Inc.</footer>
     </>
   )
 }

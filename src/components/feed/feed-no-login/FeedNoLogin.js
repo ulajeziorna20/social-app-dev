@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import axios from 'axios'
+import './FeedNoLogin.css'
 
-const FeedNoLogin = (props) => {
+const FeedNoLogin = () => {
   const [feedNoLogin, setFeedNoLogin] = useState([])
 
   const getDate = () => {
@@ -39,9 +40,21 @@ const FeedNoLogin = (props) => {
       })
   }
 
-  getDate()
+  useEffect(() => {
+    getDate()
+  }, [])
 
-  return <></>
+  let feedNoLoginList = feedNoLogin.map((userObj) => {
+    return (
+      <figure className='post' key={userObj.id}>
+        <img id='post-avatar' src={userObj.user.avatar} alt='avatar' />
+        <h6>{userObj.user.username}</h6>
+        <p className='content'>{userObj.post.content}</p>
+      </figure>
+    )
+  })
+
+  return <section className='post-box'>{feedNoLoginList}</section>
 }
 
 export default FeedNoLogin

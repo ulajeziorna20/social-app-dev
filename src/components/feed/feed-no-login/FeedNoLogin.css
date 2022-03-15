@@ -1,0 +1,10 @@
+.post {
+  border: 2px solid black;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* .post-avatar {
+  width: 10px;
+  height: 40px;
+} */
