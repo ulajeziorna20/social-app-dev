@@ -4,7 +4,13 @@
   flex-wrap: wrap;
 }
 
-/* .post-avatar {
-  width: 10px;
-  height: 40px;
-} */
+.post-box {
+  width: 600px;
+  height: 500px;
+  overflow: scroll;
+}
+
+#post-avatar {
+  width: 80px;
+  height: 80px;
+}

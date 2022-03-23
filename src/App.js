@@ -29,7 +29,7 @@ const App = () => {
           </li>
         </ul>
       </nav>
-      <img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/moon2.png' alt='fgerger' />
+
       <div className='stars'></div>
       <div className='twinkling'></div>
       <div className='clouds'></div>
@@ -40,7 +40,7 @@ const App = () => {
           <Route path='login' element={<Login />} />
         </Routes>
       </div>
-      <footer className='footer'>© 2022 by Jeziorna Urszula Inc.</footer>
+      {/* <footer className='footer'>© 2022 by Jeziorna Urszula Inc.</footer> */}
     </div>
   )
 }
