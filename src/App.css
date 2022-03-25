@@ -58,7 +58,7 @@
   z-index: -4;
 }
 
-.twinkling {
+/* .twinkling {
   width: 10000px;
   height: 100%;
   background: transparent url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/twinkling.png') repeat;
@@ -92,14 +92,14 @@
   -o-animation: move-background 150s linear infinite;
   -webkit-animation: move-background 150s linear infinite;
   animation: move-background 150s linear infinite;
-}
-img {
+} */
+/* img {
   height: 70vh;
   width: 70vh;
   position: absolute;
   z-index: -1;
   right: 20px;
-}
+} */
 
 .nav {
   padding: 15px;
