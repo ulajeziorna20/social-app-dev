@@ -27,21 +27,23 @@ const Home = () => {
   }
 
   return (
-    <>
-      <header className='header'>
-        <h1 className='main-title'>Social App</h1>
-        <h3 className='welcome-section-header'>Do you want to join them?</h3>
-        <hr id='line-header' />
-      </header>
+    <div>
+      <section className='flex-container'>
+        <header className='header'>
+          <h1 className='main-title'>Social App</h1>
+          <h3 className='welcome-section-header'>Do you want to join them?</h3>
+          <hr id='line-header' />
+        </header>
+
+        <section className='welcome-section'>
+          <div className='feed-container'>
+            <FeedNoLogin />
+          </div>
+        </section>
+      </section>
 
       {showPopup ? '' : <Popup closePopup={closePopup} />}
-
-      <section className='welcome-section'>
-        <div className='feed-container'>
-          <FeedNoLogin />
-        </div>
-      </section>
-    </>
+    </div>
   )
 }
 
