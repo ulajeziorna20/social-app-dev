@@ -3,8 +3,15 @@ import './Login.css'
 
 const Login = () => {
   const [dataForm, setDataForm] = useState({ userName: '', email: '', password: '' })
+  const [errorValidate, setErrorValidate] = useState({ errorUserName: '' })
 
-  const validationForm = () => {}
+  const validationUserName = () => {
+    if (dataForm.userName.trim().length < 4) {
+      setErrorValidate((errorValidate.errorUserName = 'min 4 znaki'))
+    } else {
+      setErrorValidate((errorValidate.errorUserName = ''))
+    }
+  }
 
   return (
     <div>
@@ -22,8 +29,13 @@ const Login = () => {
             id='uname'
             value={dataForm.userName}
             onChange={(e) => setDataForm({ userName: e.target.value })}
+            onKeyUp={() => {
+              validationUserName()
+            }}
             required
           />
+          {console.log(errorValidate.errorUserName)}
+          <span className='error'>{errorValidate.errorUserName}</span>
           <label htmlFor='email'>
             <b>Email</b>
           </label>
@@ -36,7 +48,7 @@ const Login = () => {
             onChange={(e) => setDataForm({ email: e.target.value })}
             required
           />
-
+          <span className='error'></span>
           <label htmlFor='psw'>
             <b>Password</b>
           </label>
@@ -49,6 +61,7 @@ const Login = () => {
             onChange={(e) => setDataForm({ password: e.target.value })}
             required
           />
+          <span className='error'></span>
           <button type='submit'>Login</button>
           <br />
           <label>
