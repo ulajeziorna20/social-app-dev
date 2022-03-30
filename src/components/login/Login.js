@@ -5,13 +5,37 @@ const Login = () => {
   const [dataForm, setDataForm] = useState({ userName: '', email: '', password: '' })
   const [errorValidate, setErrorValidate] = useState({ errorUserName: '' })
 
-  const validationUserName = () => {
+  const validationUserName = (e) => {
+    // e.preventDefault()
+
+    setDataForm({ userName: e.target.value })
     if (dataForm.userName.trim().length < 4) {
+      // console.log(dataForm.userName)
       setErrorValidate((errorValidate.errorUserName = 'min 4 znaki'))
     } else {
-      console.log(`jestem w elsie`)
-      setErrorValidate((errorValidate.errorUserName = ''))
+      // console.log(`jestem w elsie`)
+      setErrorValidate((prevState) => {
+        prevState.errorUserName = ''
+      })
     }
+  }
+
+  const validationEmail = () => {
+    // if (dataForm.userName.trim().length < 4) {
+    //   setErrorValidate((errorValidate.errorUserName = 'min 4 znaki'))
+    // } else {
+    //   console.log(`jestem w elsie`)
+    //   setErrorValidate((errorValidate.errorUserName = ''))
+    // }
+  }
+
+  const validationPassword = () => {
+    // if (dataForm.userName.trim().length < 4) {
+    //   setErrorValidate((errorValidate.errorUserName = 'min 4 znaki'))
+    // } else {
+    //   console.log(`jestem w elsie`)
+    //   setErrorValidate((errorValidate.errorUserName = ''))
+    // }
   }
 
   return (
@@ -35,7 +59,7 @@ const Login = () => {
             // }}
             required
           />
-          {console.log(errorValidate.errorUserName)}
+          {/* {console.log(errorValidate.errorUserName)} */}
           <span className='error'>{errorValidate.errorUserName}</span>
           <label htmlFor='email'>
             <b>Email</b>
