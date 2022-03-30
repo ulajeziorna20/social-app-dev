@@ -1,4 +1,6 @@
 import { useState } from 'react'
+
+import { useEffect } from 'react/cjs/react.production.min'
 import './Login.css'
 
 const Login = () => {
@@ -26,7 +28,6 @@ const Login = () => {
       // console.log(e.target.name)
       setDataForm({ password: e.target.value })
     }
-
     // if (dataForm.userName.trim().length < 4) {
     //   // console.log(dataForm.userName)
     //   setErrorValidate((errorValidate.errorUserName = 'min 4 znaki'))
@@ -38,23 +39,15 @@ const Login = () => {
     // }
   }
 
-  const validationEmail = () => {
-    // if (dataForm.userName.trim().length < 4) {
-    //   setErrorValidate((errorValidate.errorUserName = 'min 4 znaki'))
-    // } else {
-    //   console.log(`jestem w elsie`)
-    //   setErrorValidate((errorValidate.errorUserName = ''))
-    // }
-  }
-
-  const validationPassword = () => {
-    // if (dataForm.userName.trim().length < 4) {
-    //   setErrorValidate((errorValidate.errorUserName = 'min 4 znaki'))
-    // } else {
-    //   console.log(`jestem w elsie`)
-    //   setErrorValidate((errorValidate.errorUserName = ''))
-    // }
-  }
+  useEffect(() => {
+    if (dataForm.userName.trim().length < 4) {
+      console.log('imie za krótkie')
+    } else if (!(dataForm.email.trim().length > 0)) {
+      console.log('email za krótkie')
+    } else if (dataForm.password.trim().length > 8) {
+      console.log('hasło za krótkie')
+    }
+  }, [dataForm.userName, dataForm.email, dataForm.password])
 
   return (
     <div>
