@@ -2,22 +2,40 @@ import { useState } from 'react'
 import './Login.css'
 
 const Login = () => {
-  const [dataForm, setDataForm] = useState({ userName: '', email: '', password: '' })
-  const [errorValidate, setErrorValidate] = useState({ errorUserName: '' })
+  const [dataForm, setDataForm] = useState({
+    userName: '',
+    email: '',
+    password: '',
+    formErrors: { userNameError: '', emailError: '', passwordError: '' },
+    userNameValid: false,
+    emailValid: false,
+    passwordValid: false
+  })
 
-  const validationUserName = (e) => {
+  const handelUserName = (e) => {
     // e.preventDefault()
 
-    setDataForm({ userName: e.target.value })
-    if (dataForm.userName.trim().length < 4) {
-      // console.log(dataForm.userName)
-      setErrorValidate((errorValidate.errorUserName = 'min 4 znaki'))
-    } else {
-      // console.log(`jestem w elsie`)
-      setErrorValidate((prevState) => {
-        prevState.errorUserName = ''
-      })
+    // console.log(e.target.name)
+    if (e.target.name === 'uname') {
+      // console.log(e.target.name)
+      setDataForm({ userName: e.target.value })
+    } else if (e.target.name === 'email') {
+      // console.log(e.target.name)
+      setDataForm({ email: e.target.value })
+    } else if (e.target.name === 'psw') {
+      // console.log(e.target.name)
+      setDataForm({ password: e.target.value })
     }
+
+    // if (dataForm.userName.trim().length < 4) {
+    //   // console.log(dataForm.userName)
+    //   setErrorValidate((errorValidate.errorUserName = 'min 4 znaki'))
+    // } else {
+    //   // console.log(`jestem w elsie`)
+    //   setErrorValidate((prevState) => {
+    //     prevState.errorUserName = ''
+    //   })
+    // }
   }
 
   const validationEmail = () => {
@@ -53,14 +71,18 @@ const Login = () => {
             name='uname'
             id='uname'
             value={dataForm.userName}
-            onChange={validationUserName}
+            onChange={handelUserName}
             // onKeyUp={() => {
             //   validationUserName()
             // }}
             required
           />
           {/* {console.log(errorValidate.errorUserName)} */}
-          <span className='error'>{errorValidate.errorUserName}</span>
+          {/* <span className='error'>{errorValidate.errorUserName}</span> */}
+          {/* 
+          {errors.name && errors.name.type === 'required' && <span role='alert'>This is required</span>}
+          {errors.name && errors.name.type === 'maxLength' && <span role='alert'>Max length exceeded</span>} */}
+
           <label htmlFor='email'>
             <b>Email</b>
           </label>
@@ -70,7 +92,7 @@ const Login = () => {
             name='email'
             id='email'
             value={dataForm.email}
-            onChange={(e) => setDataForm({ email: e.target.value })}
+            onChange={handelUserName}
             required
           />
           <span className='error'></span>
@@ -83,7 +105,7 @@ const Login = () => {
             name='psw'
             id='psw'
             value={dataForm.password}
-            onChange={(e) => setDataForm({ password: e.target.value })}
+            onChange={handelUserName}
             required
           />
           <span className='error'></span>
