@@ -9,6 +9,7 @@ const Login = () => {
     if (dataForm.userName.trim().length < 4) {
       setErrorValidate((errorValidate.errorUserName = 'min 4 znaki'))
     } else {
+      console.log(`jestem w elsie`)
       setErrorValidate((errorValidate.errorUserName = ''))
     }
   }
@@ -28,10 +29,10 @@ const Login = () => {
             name='uname'
             id='uname'
             value={dataForm.userName}
-            onChange={(e) => setDataForm({ userName: e.target.value })}
-            onKeyUp={() => {
-              validationUserName()
-            }}
+            onChange={validationUserName}
+            // onKeyUp={() => {
+            //   validationUserName()
+            // }}
             required
           />
           {console.log(errorValidate.errorUserName)}
