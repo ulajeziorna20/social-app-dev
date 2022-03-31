@@ -3,7 +3,7 @@
   border: 3px solid #f1f1f1;
   background-color: white;
   width: 70vw;
-  height: 65vh;
+  height: 70vh;
   margin: auto;
   padding-top: 20px;
 }
@@ -58,26 +58,34 @@ button:hover {
   border-radius: 50%;
 } */
 
-.container {
+.container-bottom {
   padding: 16px;
   position: relative;
 }
 
-span.psw {
-  float: right;
-  padding-top: 16px;
-}
-
-
-span.error {
+p.error {
   font-size: 12px;
   color: red;
   font-style: italic;
-  top: 26%;
-  left: 5%;
-  position: absolute;
+  width: 150px;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 0;
 }
 
-/* span.error::before {
-  content: '*';
-} */
+
+.message {
+  color: white;
+  background-color: #39c390;
+  font-size: 25px;
+  border-radius: 5px;
+  width: 300px;
+  padding: 8px;
+  margin: auto
+}
+
+.empty {
+  width: 200px;
+  margin: auto;
+  height: 49.60px;
+}

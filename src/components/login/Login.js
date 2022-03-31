@@ -1,59 +1,58 @@
 import { useState } from 'react'
-
-import { useEffect } from 'react/cjs/react.production.min'
+import { useEffect } from 'react'
 import './Login.css'
 
 const Login = () => {
-  const [dataForm, setDataForm] = useState({
-    userName: '',
-    email: '',
-    password: '',
-    formErrors: { userNameError: '', emailError: '', passwordError: '' },
-    userNameValid: false,
-    emailValid: false,
-    passwordValid: false
-  })
+  const [formData, setFormData] = useState({ username: '', email: '', password: '' })
+  const [formErrors, setFormErrors] = useState({})
+  const [isSubmit, setIsSubmit] = useState(false)
 
-  const handelUserName = (e) => {
-    // e.preventDefault()
+  const handelChange = (e) => {
+    const { name, value } = e.target
+    setFormData({ ...formData, [name]: value })
+  }
 
-    // console.log(e.target.name)
-    if (e.target.name === 'uname') {
-      // console.log(e.target.name)
-      setDataForm({ userName: e.target.value })
-    } else if (e.target.name === 'email') {
-      // console.log(e.target.name)
-      setDataForm({ email: e.target.value })
-    } else if (e.target.name === 'psw') {
-      // console.log(e.target.name)
-      setDataForm({ password: e.target.value })
-    }
-    // if (dataForm.userName.trim().length < 4) {
-    //   // console.log(dataForm.userName)
-    //   setErrorValidate((errorValidate.errorUserName = 'min 4 znaki'))
-    // } else {
-    //   // console.log(`jestem w elsie`)
-    //   setErrorValidate((prevState) => {
-    //     prevState.errorUserName = ''
-    //   })
-    // }
+  const handelFormSubmit = (e) => {
+    e.preventDefault()
+
+    setFormErrors(validate(formData))
+    setIsSubmit(true)
   }
 
   useEffect(() => {
-    if (dataForm.userName.trim().length < 4) {
-      console.log('imie za krótkie')
-    } else if (!(dataForm.email.trim().length > 0)) {
-      console.log('email za krótkie')
-    } else if (dataForm.password.trim().length > 8) {
-      console.log('hasło za krótkie')
+    console.log(formErrors)
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      console.log(formData)
     }
-  }, [dataForm.userName, dataForm.email, dataForm.password])
+  }, [formErrors])
+
+  const validate = (values) => {
+    const errors = {}
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i
+    if (!values.username) {
+      errors.usernameError = '* Username is required!'
+    }
+    if (!values.email) {
+      errors.emailError = '* Email is required!'
+    } else if (regex.test(values.email)) {
+      formErrors.emailError = '* This is not a valid email form!'
+    }
+    if (!values.password) {
+      errors.passwordError = '* Password is required!'
+    }
+    return errors
+  }
 
   return (
     <div>
+      {Object.keys(formErrors).length === 0 && isSubmit ? (
+        <div className='message success'>Signed in successfully !</div>
+      ) : (
+        <div className='empty'></div>
+      )}
       <h2 className='login-title'>Login Form</h2>
 
-      <form className='form-login'>
+      <form className='form-login' onSubmit={handelFormSubmit}>
         <div className='container'>
           <label htmlFor='uname'>
             <b>Username</b>
@@ -61,21 +60,13 @@ const Login = () => {
           <input
             type='text'
             placeholder='Enter Username'
-            name='uname'
-            id='uname'
-            value={dataForm.userName}
-            onChange={handelUserName}
-            // onKeyUp={() => {
-            //   validationUserName()
-            // }}
-            required
+            name='username'
+            id='username'
+            value={formData.username}
+            onChange={handelChange}
           />
-          {/* {console.log(errorValidate.errorUserName)} */}
-          {/* <span className='error'>{errorValidate.errorUserName}</span> */}
-          {/* 
-          {errors.name && errors.name.type === 'required' && <span role='alert'>This is required</span>}
-          {errors.name && errors.name.type === 'maxLength' && <span role='alert'>Max length exceeded</span>} */}
-
+          <p className='error'>{formErrors.usernameError}</p>
+          <br />
           <label htmlFor='email'>
             <b>Email</b>
           </label>
@@ -84,24 +75,24 @@ const Login = () => {
             placeholder='Enter email'
             name='email'
             id='email'
-            value={dataForm.email}
-            onChange={handelUserName}
-            required
+            value={formData.email}
+            onChange={handelChange}
           />
-          <span className='error'></span>
+          <p className='error'>{formErrors.emailError}</p>
+          <br />
           <label htmlFor='psw'>
             <b>Password</b>
           </label>
           <input
             type='password'
             placeholder='Enter Password'
-            name='psw'
-            id='psw'
-            value={dataForm.password}
-            onChange={handelUserName}
-            required
+            name='password'
+            id='password'
+            value={formData.password}
+            onChange={handelChange}
           />
-          <span className='error'></span>
+          <p className='error'>{formErrors.passwordError}</p>
+          <br />
           <button type='submit'>Login</button>
           <br />
           <label>
@@ -109,7 +100,7 @@ const Login = () => {
           </label>
         </div>
 
-        <div className='container'>
+        <div className='container-bottom'>
           <button type='button' className='cancelbtn'>
             Cancel
           </button>
