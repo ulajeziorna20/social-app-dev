@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 
 import axios from 'axios'
 import './FeedNoLogin.css'
+import uniqueId from 'lodash.uniqueid'
 
 const FeedNoLogin = () => {
   const [feedNoLogin, setFeedNoLogin] = useState([])
@@ -12,14 +13,11 @@ const FeedNoLogin = () => {
         mode: 'corse'
       })
       .then((res) => {
-        // console.log(res.data)
         let feedNoLoginList = []
 
         for (const [userIndex, userData] of Object.entries(res.data)) {
-          // console.log(userIndex)
-          // console.log(userData)
-          // console.log(userData.content)
           let userFeedNoLogin = {
+            userIndex: userIndex,
             post: {
               postId: userData.id,
               content: userData.content,
@@ -35,7 +33,7 @@ const FeedNoLogin = () => {
           }
           feedNoLoginList.push(userFeedNoLogin)
         }
-        // console.log(feedNoLoginList)
+
         setFeedNoLogin(feedNoLoginList)
       })
   }
@@ -46,7 +44,7 @@ const FeedNoLogin = () => {
 
   let feedNoLoginList = feedNoLogin.map((userObj) => {
     return (
-      <figure className='post' key={userObj.id}>
+      <figure className='post' key={uniqueId('prefix')}>
         <img id='post-avatar' src={userObj.user.avatar} alt='avatar' />
         <h6>{userObj.user.username}</h6>
         <p className='content'>{userObj.post.content}</p>
