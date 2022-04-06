@@ -7,7 +7,7 @@ import uniqueId from 'lodash.uniqueid'
 const FeedNoLogin = () => {
   const [feedNoLogin, setFeedNoLogin] = useState([])
 
-  const getDate = () => {
+  const getData = () => {
     axios
       .post('https://akademia108.pl/api/social-app/post/latest', {
         mode: 'corse'
@@ -15,9 +15,9 @@ const FeedNoLogin = () => {
       .then((res) => {
         let feedNoLoginList = []
 
-        for (const [userIndex, userData] of Object.entries(res.data)) {
+        for (const userData of res.data) {
           let userFeedNoLogin = {
-            userIndex: userIndex,
+            feedId: uniqueId(),
             post: {
               postId: userData.id,
               content: userData.content,
@@ -39,7 +39,7 @@ const FeedNoLogin = () => {
   }
 
   useEffect(() => {
-    getDate()
+    getData()
   }, [])
 
   let feedNoLoginList = feedNoLogin.map((userObj) => {
