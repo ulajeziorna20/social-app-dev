@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useEffect } from 'react'
 import './Signup.css'
 
 const Signup = () => {
@@ -19,13 +18,6 @@ const Signup = () => {
     setIsSubmit(true)
   }
 
-  useEffect(() => {
-    console.log(formErrors)
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(formData)
-    }
-  }, [formErrors])
-
   const validate = (values) => {
     const errors = {}
 
@@ -36,10 +28,8 @@ const Signup = () => {
     if (!values.username) {
       errors.usernameError = '* Username is required!'
     } else if (values.username.trim().length < 4) {
-      // console.log(values.username.trim().length)
       errors.usernameError = '* Username has to have min. 4 chars!'
     } else if (values.username.includes(' ')) {
-      // console.log(values.username.trim().length)
       errors.usernameError = "* Username doesn'\t have to have white chars!"
     }
 
@@ -48,7 +38,6 @@ const Signup = () => {
     } else if (values.email.trim().length < 4) {
       errors.emailError = '* Email has to have min. 4 chars!'
     } else if (values.email.includes(' ')) {
-      // console.log(values.username.trim().length)
       errors.emailError = "* Email doesn'\t have to have white chars!"
     } else if (!regex.test(values.email)) {
       errors.emailError = '* This is not a valid email form!'
@@ -57,10 +46,8 @@ const Signup = () => {
     if (!values.password) {
       errors.passwordError = '* Password is required!'
     } else if (values.password.trim().length < 6) {
-      console.log(values.password)
       errors.passwordError = '* Password has to have min. 6 chars!'
     } else if (values.password.includes(' ')) {
-      console.log(values.password)
       errors.passwordError = "* Password doesn'\t have to have white chars!"
     } else if (!values.password.match(hasNumber) >= 1) {
       errors.passwordError = '* Password has to have min. 1 number!'
@@ -70,7 +57,6 @@ const Signup = () => {
 
     if (!values.confirmPassword) {
       errors.confirmPasswordError = '* You have to confirm your password!!'
-      console.log(formData.password)
     } else if (!(values.confirmPassword === formData.password)) {
       errors.confirmPasswordError = '* This field should look the same as the previous one with your new password !'
     }
