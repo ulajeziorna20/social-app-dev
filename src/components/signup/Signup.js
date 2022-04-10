@@ -4,7 +4,6 @@ import './Signup.css'
 const Signup = () => {
   const [formData, setFormData] = useState({ username: '', email: '', password: '', confirmPassword: '' })
   const [formErrors, setFormErrors] = useState({})
-  const [isSubmit, setIsSubmit] = useState(false)
 
   const handelChange = (e) => {
     const { name, value } = e.target
@@ -15,7 +14,6 @@ const Signup = () => {
     e.preventDefault()
 
     setFormErrors(validate(formData))
-    setIsSubmit(true)
   }
 
   const validate = (values) => {
@@ -66,11 +64,11 @@ const Signup = () => {
 
   return (
     <div>
-      {Object.keys(formErrors).length === 0 && isSubmit ? (
+      {/* { ? (
         <div className='message success'>Signed in successfully !</div>
       ) : (
         <div className='empty'></div>
-      )}
+      )} */}
       <h2 className='login-title'>Signup Form</h2>
 
       <form className='form-login' onSubmit={handelFormSubmit}>
