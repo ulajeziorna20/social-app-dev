@@ -4,6 +4,7 @@ import './Signup.css'
 const Signup = () => {
   const [formData, setFormData] = useState({ username: '', email: '', password: '', confirmPassword: '' })
   const [formErrors, setFormErrors] = useState({})
+  const [isSubmit, setIsSubmit] = useState(false)
 
   const handelChange = (e) => {
     const { name, value } = e.target
@@ -59,7 +60,16 @@ const Signup = () => {
       errors.confirmPasswordError = '* This field should look the same as the previous one with your new password !'
     }
 
+    if (errors.length === 0) {
+      setIsSubmit(true)
+    }
+
     return errors
+  }
+
+  const submitForm = () => {
+    // if (!isSubmit) {
+    // }
   }
 
   return (
