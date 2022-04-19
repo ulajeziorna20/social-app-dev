@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 import axios from 'axios'
 import './FeedNoLogin.css'
@@ -6,6 +6,7 @@ import uniqueId from 'lodash.uniqueid'
 
 const FeedNoLogin = () => {
   const [feedNoLogin, setFeedNoLogin] = useState([])
+  // const [pageNumber, setPageNumber] = useState[1]
 
   const getData = () => {
     axios
@@ -33,6 +34,7 @@ const FeedNoLogin = () => {
           }
           feedNoLoginList.push(userFeedNoLogin)
         }
+        console.log(feedNoLoginList)
 
         setFeedNoLogin(feedNoLoginList)
       })
@@ -52,7 +54,11 @@ const FeedNoLogin = () => {
     )
   })
 
-  return <section className='post-box'>{feedNoLoginList}</section>
+  return (
+    <div>
+      <section className='post-box'>{feedNoLoginList}</section>
+    </div>
+  )
 }
 
 export default FeedNoLogin

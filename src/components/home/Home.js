@@ -41,6 +41,7 @@ const Home = () => {
           </div>
         </section>
       </section>
+      <iframe src='https://gifer.com/embed/AqCa' width='480' height='360.000' frameBorder='0' allowFullScreen></iframe>
 
       {showPopup ? '' : <Popup closePopup={closePopup} />}
     </div>

@@ -10,9 +10,10 @@
 }
 
 .header {
-  flex-basis: 45%;
+  flex-basis: 25%;
   margin-bottom: 0;
   height: 80px;
+  margin-left: 30PX;
 }
 
 .main-title {
@@ -22,11 +23,11 @@
 }
 
 .welcome-section {
-  flex-basis: 45%;
+  flex-basis: 60%;
   width: 40vw;
   height: 60vh;
   /* color: black; */
-  background-color: white;
+  /* background-color: white; */
   /* margin: 120px auto; */
   display: flex;
   flex-wrap: wrap;
@@ -50,7 +51,7 @@
   /* flex-basis: 100%; */
   width: 40vw;
   height: 60vh;
-  background-color: white;
+  /* background-color: white; */
 }
 
 .main-feed {
