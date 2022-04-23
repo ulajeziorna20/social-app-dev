@@ -2,7 +2,11 @@
   text-align: center;
 }
 
-/* background animation */
+body {
+  background-color: rgba(28, 27, 19, 0.733);
+}
+
+/* background animation
 @keyframes move-background {
   from {
     -webkit-transform: translate3d(0px, 0px, 0px);
@@ -36,16 +40,18 @@
   to {
     -webkit-transform: translate3d(1000px, 0px, 0px);
   }
-}
+} */
 
-.background-container {
-  z-index: -5;
-  /* height: 2000px; */
-  /* background-size: cover; */
-  
-  
-}
-
+/* .background-container {
+  /* position: fixed;
+  top: 10px;
+  left: 0;
+  bottom: 0;
+  right: 0; */
+/* z-index: 9;
+  position: relative;
+} */
+/* 
 .stars {
   background: black url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/stars.png) repeat;
   position: absolute;
@@ -55,7 +61,7 @@
   right: 0;
   display: block;
   z-index: -4;
-}
+} */
 
 /* .twinkling {
   width: 500px;

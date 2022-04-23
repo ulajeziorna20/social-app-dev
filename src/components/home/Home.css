@@ -7,13 +7,13 @@
   display: flex;
   flex-wrap: wrap;
   margin-top: 50px;
+  height: 1300px;
 }
 
 .header {
   flex-basis: 25%;
   margin-bottom: 0;
   height: 80px;
-  margin-left: 30PX;
 }
 
 .main-title {
@@ -22,18 +22,13 @@
   margin: 0;
 }
 
-.welcome-section {
+.feed-section {
   flex-basis: 60%;
-  width: 40vw;
-  height: 60vh;
-  /* color: black; */
-  /* background-color: white; */
-  /* margin: 120px auto; */
-  display: flex;
+  /* height: 200vh; */
+  /* display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
-  /* margin-left: 500px; */
+  justify-content: center; */
 }
 
 .welcome-section-header {
@@ -44,14 +39,6 @@
 
 #line-header {
   width: 160px;
-}
-
-.feed-container {
-  margin: 0 200px;
-  /* flex-basis: 100%; */
-  width: 40vw;
-  height: 60vh;
-  /* background-color: white; */
 }
 
 .main-feed {

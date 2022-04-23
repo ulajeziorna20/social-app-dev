@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 import './Home.css'
 
 import FeedNoLogin from '../feed/feed-no-login/FeedNoLogin'
 import Popup from '../popup/Popup'
+import LoadingLoader from './loading-loader.gif'
 
 const Home = () => {
   const [showPopup, setShowPopup] = useState(true)
+  const [loadNumber, setLoadNumber] = useState(1)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const PopUpStatusChange = () => {
@@ -26,6 +29,33 @@ const Home = () => {
     setShowPopup(true)
   }
 
+  // intersection observer
+  const setLoadingChild = () => {
+    setLoading(true)
+  }
+
+  const loadNumberAdd = () => {
+    setLoadNumber((prevLoadNumber) => prevLoadNumber + 1)
+  }
+
+  const pageEnd = useRef()
+  useEffect(() => {
+    if (loading) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          console.log(entries)
+
+          if (entries[0].isIntersecting) {
+            loadNumberAdd()
+            console.log('observer')
+          }
+        },
+        { threshold: 1 }
+      )
+      observer.observe(pageEnd.current)
+    }
+  }, [loading])
+
   return (
     <div>
       <section className='flex-container'>
@@ -35,15 +65,15 @@ const Home = () => {
           <hr id='line-header' />
         </header>
 
-        <section className='welcome-section'>
-          <div className='feed-container'>
-            <FeedNoLogin />
-          </div>
+        <section className='feed-section'>
+          <FeedNoLogin loadNumber={loadNumber} setLoading={setLoadingChild} />
         </section>
       </section>
-      <iframe src='https://gifer.com/embed/AqCa' width='480' height='360.000' frameBorder='0' allowFullScreen></iframe>
 
       {showPopup ? '' : <Popup closePopup={closePopup} />}
+
+      <div className='intersection-target' ref={pageEnd}></div>
+      <img src={LoadingLoader} alt='gif' />
     </div>
   )
 }

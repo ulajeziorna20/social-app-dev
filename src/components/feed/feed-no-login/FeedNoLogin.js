@@ -4,9 +4,8 @@ import axios from 'axios'
 import './FeedNoLogin.css'
 import uniqueId from 'lodash.uniqueid'
 
-const FeedNoLogin = () => {
+const FeedNoLogin = (props) => {
   const [feedNoLogin, setFeedNoLogin] = useState([])
-  // const [pageNumber, setPageNumber] = useState[1]
 
   const getData = () => {
     axios
@@ -34,15 +33,42 @@ const FeedNoLogin = () => {
           }
           feedNoLoginList.push(userFeedNoLogin)
         }
-        console.log(feedNoLoginList)
 
-        setFeedNoLogin(feedNoLoginList)
+        if (props.loading === false) {
+          console.log('i am loading')
+        }
+        setFeedNoLogin((prevData) => [...prevData, ...feedNoLoginList])
+        props.setLoading()
       })
   }
 
+  // useEffect(() => {
+  //   getData()
+  // }, [])
+
   useEffect(() => {
     getData()
-  }, [])
+  }, [props.loadNumber])
+
+  //  Intersection observer
+
+  const numSteps = 20.0
+
+  let boxElement
+  let prevRatio = 0.0
+  let increasingColor = 'rgba(40, 40, 190, ratio)'
+  let decreasingColor = 'rgba(190, 40, 40, ratio)'
+
+  // Set things up
+  // window.addEventListener(
+  //   'load',
+  //   (event) => {
+  //     boxElement = document.querySelector('#box')
+
+  //     createObserver()
+  //   },
+  //   false
+  // )
 
   let feedNoLoginList = feedNoLogin.map((userObj) => {
     return (
@@ -56,7 +82,10 @@ const FeedNoLogin = () => {
 
   return (
     <div>
-      <section className='post-box'>{feedNoLoginList}</section>
+      <section className='post-box'>
+        {feedNoLoginList}
+        <div>HalloUla</div>
+      </section>
     </div>
   )
 }
