@@ -4,8 +4,10 @@ import axios from 'axios'
 import './FeedNoLogin.css'
 import uniqueId from 'lodash.uniqueid'
 
-const FeedNoLogin = (props) => {
+const FeedNoLogin = () => {
   const [feedNoLogin, setFeedNoLogin] = useState([])
+  const [loadNumber, setLoadNumber] = useState(1)
+  const [loading, setLoading] = useState(false)
 
   const getData = () => {
     axios
@@ -33,42 +35,36 @@ const FeedNoLogin = (props) => {
           }
           feedNoLoginList.push(userFeedNoLogin)
         }
-
-        if (props.loading === false) {
-          console.log('i am loading')
-        }
         setFeedNoLogin((prevData) => [...prevData, ...feedNoLoginList])
-        props.setLoading()
+        setLoading(true)
       })
   }
 
-  // useEffect(() => {
-  //   getData()
-  // }, [])
-
   useEffect(() => {
     getData()
-  }, [props.loadNumber])
+  }, [loadNumber])
 
   //  Intersection observer
 
-  const numSteps = 20.0
+  const loadNumberAdd = () => {
+    setLoadNumber((prevLoadNumber) => prevLoadNumber + 1)
+  }
 
-  let boxElement
-  let prevRatio = 0.0
-  let increasingColor = 'rgba(40, 40, 190, ratio)'
-  let decreasingColor = 'rgba(190, 40, 40, ratio)'
+  const pageEnd = useRef()
 
-  // Set things up
-  // window.addEventListener(
-  //   'load',
-  //   (event) => {
-  //     boxElement = document.querySelector('#box')
-
-  //     createObserver()
-  //   },
-  //   false
-  // )
+  useEffect(() => {
+    if (loading) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            loadNumberAdd()
+          }
+        },
+        { threshold: 1 }
+      )
+      observer.observe(pageEnd.current)
+    }
+  }, [loading])
 
   let feedNoLoginList = feedNoLogin.map((userObj) => {
     return (
@@ -82,10 +78,10 @@ const FeedNoLogin = (props) => {
 
   return (
     <div>
-      <section className='post-box'>
-        {feedNoLoginList}
-        <div>HalloUla</div>
-      </section>
+      <section className='post-box'>{feedNoLoginList}</section>
+      <div className='box'>
+        <div className='loader-box' ref={pageEnd}></div>
+      </div>
     </div>
   )
 }
