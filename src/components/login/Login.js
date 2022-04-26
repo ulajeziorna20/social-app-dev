@@ -1,7 +1,16 @@
+import { useState } from 'react'
+
 import './Login.css'
 import { Link } from 'react-router-dom'
 
 const Login = () => {
+  const [formData, setFormData] = useState({ username: '', password: '' })
+
+  const handelChange = (e) => {
+    const { name, value } = e.target
+    setFormData({ ...formData, [name]: value })
+  }
+
   return (
     <div>
       <h2 className='login-title'>Login</h2>
@@ -11,13 +20,27 @@ const Login = () => {
           <label htmlFor='uname'>
             <b>Username</b>
           </label>
-          <input type='text' placeholder='Enter Username' name='username' id='username' />
+          <input
+            type='text'
+            placeholder='Enter Username'
+            name='username'
+            id='username'
+            value={formData.username}
+            onChange={handelChange}
+          />
           <p className='error'></p>
           <br />
-          <label htmlFor='email'>
-            <b>Email</b>
+          <label htmlFor='password'>
+            <b>Password</b>
           </label>
-          <input type='email' placeholder='Enter email' name='email' id='email' />
+          <input
+            type='password'
+            placeholder='Enter password'
+            name='password'
+            id='password'
+            value={formData.password}
+            onChange={handelChange}
+          />
           <p className='error'></p>
           <br />
 
