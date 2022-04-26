@@ -11,18 +11,47 @@ const Popup = (props) => {
             close
           </div>
           <div className='popup-box solid'>
-            <form className='form'>
-              <h1 className='login-header'>Sign in!</h1>
-              <label htmlFor='userName'>Username</label>
-              <br />
-              <input type='text' name='userName' id='userName' className='login-box' />
-              <br />
-              <label htmlFor='password'>Password</label>
-              <br />
-              <input type='password' name='password' id='password' className='login-box' />
-              <br />
-              <br />
-              <input type='submit' value='LOGIN' className='login-btn' />
+            <h2 className='login-title'>Login</h2>
+
+            <form className='form-login'>
+              <div className='container'>
+                <label htmlFor='uname'>
+                  <b>Username</b>
+                </label>
+                <input type='text' placeholder='Enter Username' name='username' id='username' />
+                <p className='error'></p>
+                <br />
+                <label htmlFor='email'>
+                  <b>Email</b>
+                </label>
+                <input type='email' placeholder='Enter email' name='email' id='email' />
+                <p className='error'></p>
+                <br />
+
+                <button type='submit'>Login</button>
+                <br />
+                <label>
+                  <input type='checkbox' name='remember' /> Remember me
+                </label>
+              </div>
+
+              <div className='container-bottom'>
+                <button type='button' className='cancelbtn'>
+                  Cancel
+                </button>
+                <span className='psw'>
+                  Forgot <a href='#'>password?</a>
+                </span>
+                <nav>
+                  <ul>
+                    <li className='nav-item'>
+                      <Link to='/signup' className='link'>
+                        Sign Up!
+                      </Link>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
             </form>
             <Link to='/sign-up' className='link'>
               Sign Up!
