@@ -1,24 +1,20 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './Signup.css'
 
 const Signup = () => {
   const [formData, setFormData] = useState({ username: '', email: '', password: '', confirmPassword: '' })
   const [formErrors, setFormErrors] = useState({})
   const [isSubmit, setIsSubmit] = useState(false)
+  const [message, setMessage] = useState('')
+  const [classValid, setClassValid] = useState('')
 
   const handelChange = (e) => {
     const { name, value } = e.target
     setFormData({ ...formData, [name]: value })
   }
 
-  const handelFormSubmit = (e) => {
-    e.preventDefault()
-
-    setFormErrors(validate(formData))
-  }
-
   const validate = (values) => {
-    const errors = {}
+    const errors = { usernameError: '', emailError: '', passwordError: '', confirmPasswordError: '' }
 
     let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}')
     let hasNumber = /\d/
@@ -60,25 +56,59 @@ const Signup = () => {
       errors.confirmPasswordError = '* This field should look the same as the previous one with your new password !'
     }
 
-    if (errors.length === 0) {
+    if (
+      errors.usernameError === '' &&
+      errors.emailError === '' &&
+      errors.passwordError === '' &&
+      errors.confirmPasswordError === ''
+    ) {
       setIsSubmit(true)
+    } else {
+      setIsSubmit(false)
     }
+
+    console.log(formErrors)
+    console.log(isSubmit)
 
     return errors
   }
 
-  const submitForm = () => {
-    // if (!isSubmit) {
-    // }
+  const handelFormSubmit = (e) => {
+    e.preventDefault()
+
+    setFormErrors(validate(formData))
+    console.log('walidujemy')
+
+    // console.log(formErrors)
+    // console.log(isSubmit)
   }
+
+  const submitForm = () => {
+    if (isSubmit === true) {
+      setMessage('Signup is successfully!')
+      setClassValid('success')
+    } else {
+      setMessage('Check your form. Have you completed everything?')
+      setClassValid('invalid')
+    }
+  }
+
+  useEffect(() => {
+    submitForm()
+  }, [isSubmit])
+
+  // useEffect(() => {
+  //   if (formErrors.length === 0) {
+  //     // setIsSubmit(true)
+  //     console.log(isSubmit)
+  //     // submitForm()
+  //   }
+  // }, [formErrors])
 
   return (
     <div>
-      {/* { ? (
-        <div className='message success'>Signed in successfully !</div>
-      ) : (
-        <div className='empty'></div>
-      )} */}
+      <div className={classValid}>{message}</div>
+
       <h2 className='login-title'>Signup Form</h2>
 
       <form className='form-login' onSubmit={handelFormSubmit}>
