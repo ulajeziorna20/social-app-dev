@@ -20,22 +20,15 @@ const Login = () => {
   }
 
   const handelFormSubmit = (e) => {
-    let postData = {
-      username: formData.username,
-      password: formData.password
-    }
-    console.log(postData.username)
-    console.log(postData.password)
-    axios
-      .post('https://akademia108.pl/api/social-app/user/login', JSON.stringify(postData), JSON.stringify(axiosConfig))
-      .then((response) => {
-        console.log(response)
-        console.log('wysłano zapytanie')
-      })
-      .catch((error) => {
-        console.log(error)
-      })
     e.preventDefault()
+    let postData = {
+      password: formData.password,
+      username: formData.username
+    }
+
+    axios.post('https://akademia108.pl/api/social-app/user/login', postData, axiosConfig).then((response) => {
+      console.log(response)
+    })
   }
 
   return (
