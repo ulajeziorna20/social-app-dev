@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
+
 import './Signup.css'
+import SignupDataReq from './SignupDataReq'
 
 const Signup = () => {
   const [formData, setFormData] = useState({ username: '', email: '', password: '', confirmPassword: '' })
@@ -7,10 +9,18 @@ const Signup = () => {
   const [isSubmit, setIsSubmit] = useState(false)
   const [message, setMessage] = useState('')
   const [classValid, setClassValid] = useState('')
+  // const firstRender = useRef(true)
 
   const handelChange = (e) => {
     const { name, value } = e.target
     setFormData({ ...formData, [name]: value })
+  }
+
+  const handelFormSubmit = (e) => {
+    e.preventDefault()
+
+    setFormErrors(validate(formData))
+    // console.log('walidujemy')
   }
 
   const validate = (values) => {
@@ -67,43 +77,23 @@ const Signup = () => {
       setIsSubmit(false)
     }
 
-    console.log(formErrors)
-    console.log(isSubmit)
-
-    return errors
-  }
-
-  const handelFormSubmit = (e) => {
-    e.preventDefault()
-
-    setFormErrors(validate(formData))
-    console.log('walidujemy')
-
     // console.log(formErrors)
     // console.log(isSubmit)
+
+    return errors
   }
 
   const submitForm = () => {
     if (isSubmit === true) {
       setMessage('Signup is successfully!')
       setClassValid('success')
-    } else {
-      setMessage('Check your form. Have you completed everything?')
-      setClassValid('invalid')
     }
   }
 
   useEffect(() => {
     submitForm()
+    console.log(formData)
   }, [isSubmit])
-
-  // useEffect(() => {
-  //   if (formErrors.length === 0) {
-  //     // setIsSubmit(true)
-  //     console.log(isSubmit)
-  //     // submitForm()
-  //   }
-  // }, [formErrors])
 
   return (
     <div>
@@ -168,22 +158,17 @@ const Signup = () => {
           <p className='error'>{formErrors.confirmPasswordError}</p>
           <br />
 
-          <button type='submit'>Login</button>
+          <button type='submit'>Sign up!</button>
           <br />
-          <label>
-            <input type='checkbox' name='remember' /> Remember me
-          </label>
         </div>
 
         <div className='container-bottom'>
           <button type='button' className='cancelbtn'>
             Cancel
           </button>
-          <span className='psw'>
-            Forgot <a href='#'>password?</a>
-          </span>
         </div>
       </form>
+      <SignupDataReq formData={formData} isSubmit={isSubmit} />
     </div>
   )
 }
