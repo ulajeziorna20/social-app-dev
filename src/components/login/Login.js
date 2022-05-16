@@ -1,11 +1,21 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import axios from 'axios'
 import './Login.css'
 import { Link } from 'react-router-dom'
 
+// import LoginStorage from '../local-storage/login-storage/LoginStorage'
+
 const Login = () => {
-  const [formData, setFormData] = useState({ username: '', password: '' })
+  const [formData, setFormData] = useState({
+    username: '',
+    password: ''
+  })
+  const [dataLoggedUser, setDataLoggedUser] = useState({
+    jwt: '',
+    userName: '',
+    ttl: ''
+  })
 
   const handelChange = (e) => {
     const { name, value } = e.target
@@ -26,10 +36,22 @@ const Login = () => {
       username: formData.username
     }
 
-    axios.post('https://akademia108.pl/api/social-app/user/login', postData, axiosConfig).then((response) => {
-      console.log(response)
+    axios.post('https://akademia108.pl/api/social-app/user/login', postData, axiosConfig).then((res) => {
+      console.log(res)
+
+      setDataLoggedUser({
+        jwt: res.data.jwt_token,
+        userName: res.data.username,
+        ttl: res.data.ttl
+      })
     })
   }
+
+  useEffect(() => {
+    console.log('zapis do local storage')
+
+    localStorage.setItem('dataLoggedData', JSON.stringify(dataLoggedUser))
+  }, [dataLoggedUser])
 
   return (
     <div>
@@ -89,6 +111,7 @@ const Login = () => {
           </nav>
         </div>
       </form>
+      {/* <LoginStorage dataLoggedUser={dataLoggedUser} /> */}
     </div>
   )
 }
