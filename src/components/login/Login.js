@@ -2,11 +2,9 @@ import { useState, useEffect } from 'react'
 
 import axios from 'axios'
 import './Login.css'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 
-// import LoginStorage from '../local-storage/login-storage/LoginStorage'
-
-const Login = () => {
+const Login = (props) => {
   const [formData, setFormData] = useState({
     username: '',
     password: ''
@@ -14,8 +12,11 @@ const Login = () => {
   const [dataLoggedUser, setDataLoggedUser] = useState({
     jwt: '',
     userName: '',
-    ttl: ''
+    ttl: '',
+    error: true
   })
+
+  const [errorLogin, setErrorLogin] = useState(true)
 
   const handelChange = (e) => {
     const { name, value } = e.target
@@ -39,22 +40,37 @@ const Login = () => {
     axios.post('https://akademia108.pl/api/social-app/user/login', postData, axiosConfig).then((res) => {
       console.log(res)
 
-      setDataLoggedUser({
-        jwt: res.data.jwt_token,
-        userName: res.data.username,
-        ttl: res.data.ttl
-      })
+      if (res.data.error === false) {
+        setDataLoggedUser({
+          jwt: res.data.jwt_token,
+          userName: res.data.username,
+          ttl: res.data.ttl,
+          error: res.data.error
+        })
+
+        setErrorLogin(false)
+      }
     })
   }
 
   useEffect(() => {
-    console.log('zapis do local storage')
-
-    localStorage.setItem('dataLoggedData', JSON.stringify(dataLoggedUser))
+    if (dataLoggedUser.jwt === '' && dataLoggedUser.userName === '' && dataLoggedUser.ttl === '') {
+      // console.log('bez zapisu do lacaleStorage')
+    } else {
+      // console.log('zapis do local storage')
+      localStorage.setItem('dataLoggedData', JSON.stringify(dataLoggedUser))
+    }
   }, [dataLoggedUser])
+
+  useEffect(() => {
+    if (errorLogin === false) {
+      props.isAuthenticated('accept')
+    }
+  }, [errorLogin])
 
   return (
     <div>
+      {errorLogin === false && <Navigate replace to='/' />}
       <h2 className='login-title'>Login</h2>
 
       <form className='form-login' onSubmit={handelFormSubmit}>
@@ -111,7 +127,7 @@ const Login = () => {
           </nav>
         </div>
       </form>
-      {/* <LoginStorage dataLoggedUser={dataLoggedUser} /> */}
+      {/* <Authenticated errorLogin={errorLogin} /> */}
     </div>
   )
 }

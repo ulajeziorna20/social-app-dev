@@ -1,13 +1,23 @@
 import './App.css'
 
-import { Routes, Route } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
+
+import { Link, Navigate, Routes, Route } from 'react-router-dom'
 
 import Home from './components/home/Home'
+import HomeLoggedIn from './components/homeLoggedIn/HomeLoggedIn'
 import Login from './components/login/Login'
 import Signup from './components/signup/Signup'
 
-const App = () => {
+const App = (props) => {
+  const [isAuth, setIsAuth] = useState(false)
+
+  const isAuthenticated = (response) => {
+    console.log('callback z Loginu')
+    if (response === 'accept') {
+      setIsAuth(true)
+    }
+  }
   return (
     <div className='background-container'>
       <nav className='nav'>
@@ -27,17 +37,25 @@ const App = () => {
               Login
             </Link>
           </li>
+          <li className='nav-item'>
+            <Link to='/' className='link'>
+              Logout
+            </Link>
+          </li>
+          <li className='nav-item'>
+            <Link to='/homeLoggedIn' className='link'>
+              HomeLogged
+            </Link>
+          </li>
         </ul>
       </nav>
-      {/* <img src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/moon2.png' alt='fgerger' /> */}
-      <div className='stars'></div>
-      <div className='twinkling'></div>
-      <div className='clouds'></div>
       <div className='App'>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='signup' element={<Signup />} />
-          <Route path='login' element={<Login />} />
+          <Route path='login' element={<Login isAuthenticated={isAuthenticated} />} />
+          <Route path='homeLoggedIn' element={<HomeLoggedIn />} />
+          <Route path='home' element={<Home />} />
         </Routes>
       </div>
     </div>
