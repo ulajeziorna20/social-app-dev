@@ -36,11 +36,13 @@ const Login = (props) => {
       password: formData.password,
       username: formData.username
     }
+    console.log('jestem popup zapisuje')
 
     axios.post('https://akademia108.pl/api/social-app/user/login', postData, axiosConfig).then((res) => {
       console.log(res)
 
       if (res.data.error === false) {
+        console.log('jestem popup')
         setDataLoggedUser({
           jwt: res.data.jwt_token,
           userName: res.data.username,
@@ -55,22 +57,29 @@ const Login = (props) => {
 
   useEffect(() => {
     if (dataLoggedUser.jwt === '' && dataLoggedUser.userName === '' && dataLoggedUser.ttl === '') {
-      // console.log('bez zapisu do lacaleStorage')
+      return
     } else {
-      // console.log('zapis do local storage')
-      localStorage.setItem('dataLoggedData', JSON.stringify(dataLoggedUser))
+      localStorage.setItem('dataLoggedUser', JSON.stringify(dataLoggedUser))
     }
   }, [dataLoggedUser])
 
+  // useEffect(() => {
+  //   if (errorLogin === false) {
+  //     props.isAuthenticated('accept')
+  //   }
+  // }, [errorLogin])
+
   useEffect(() => {
-    if (errorLogin === false) {
-      props.isAuthenticated('accept')
+    if (props.isAuth === false) {
+      setErrorLogin(true)
+    } else {
+      return
     }
-  }, [errorLogin])
+  }, [props.isAuth])
 
   return (
     <div>
-      {errorLogin === false && <Navigate replace to='/' />}
+      {errorLogin === false && <Navigate replace to='/homeLoggedIn' />}
       <h2 className='login-title'>Login</h2>
 
       <form className='form-login' onSubmit={handelFormSubmit}>
