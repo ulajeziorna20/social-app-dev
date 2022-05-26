@@ -13,7 +13,7 @@ const Popup = (props) => {
             close
           </div>
           <div className='popup-box solid'>
-            <Login />
+            <Login isAuthenticated={props.isAuthenticated} isAuth={props.isAuth} />
             <Link to='/sign-up' className='link'>
               Sign Up!
             </Link>

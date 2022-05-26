@@ -63,11 +63,12 @@ const Login = (props) => {
     }
   }, [dataLoggedUser])
 
-  // useEffect(() => {
-  //   if (errorLogin === false) {
-  //     props.isAuthenticated('accept')
-  //   }
-  // }, [errorLogin])
+  useEffect(() => {
+    if (errorLogin === false) {
+      // console.log(props.isAuthenticated)
+      props.isAuthenticated('accept')
+    }
+  }, [errorLogin])
 
   useEffect(() => {
     if (props.isAuth === false) {

@@ -13,13 +13,6 @@ import Signup from './components/signup/Signup'
 const App = () => {
   const [isAuth, setIsAuth] = useState(false)
 
-  const isAuthenticated = (response) => {
-    // console.log('callback z Loginu')
-    if (response === 'accept') {
-      setIsAuth(true)
-    }
-  }
-
   const logoutAction = () => {
     setIsAuth(false)
     localStorage.removeItem('dataLoggedUser')
@@ -66,6 +59,13 @@ const App = () => {
 
   let routes = navUnloggedUsers
 
+  const isAuthenticated = (response) => {
+    // console.log('callback z Loginu')
+    if (response === 'accept') {
+      setIsAuth(true)
+    }
+  }
+
   if (isAuth === true) {
     routes = navLoggedUsers
   }
@@ -75,14 +75,15 @@ const App = () => {
       {routes}
       <div className='App'>
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<Home isAuthenticated={isAuthenticated} isAuth={isAuth} />} />
           <Route path='signup' element={<Signup />} />
           <Route path='login' element={<Login isAuthenticated={isAuthenticated} isAuth={isAuth} />} />
           <Route path='homeLoggedIn' element={<HomeLoggedIn />} />
-          <Route path='home' element={<Home />} />
+          {/* <Route path='home' element={<Home />} /> */}
           <Route path='logout' element={<Logout />} />
         </Routes>
       </div>
+      {/* PRÓBA REDUX */}
     </div>
   )
 }
