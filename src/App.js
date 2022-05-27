@@ -53,6 +53,11 @@ const App = () => {
             HomeLogged
           </Link>
         </li>
+        <li className='nav-item'>
+          <Link to='/' className='link'>
+            myFollows
+          </Link>
+        </li>
       </ul>
     </nav>
   )
