@@ -1,0 +1,30 @@
+.post {
+  border: 2px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: white;
+}
+
+.post-box {
+  width: 60vw;
+  height: min-content;
+}
+
+#post-avatar {
+  width: 80px;
+  height: 80px;
+}
+
+.loader-box {
+  width: 150px;
+  height: 50px;
+  background-image: url('./loading-loader.gif');
+  background-size: cover;
+  background-position: center;
+  margin: auto;
+}
+
+.box {
+  height: 30px;
+  width: 30px;
+}

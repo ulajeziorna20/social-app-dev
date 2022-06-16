@@ -2,49 +2,46 @@ import React, { useState, useEffect } from 'react'
 
 import './Home.css'
 
+import FeedNoLogin from '../feed/feed-no-login/FeedNoLogin'
 import Popup from '../popup/Popup'
 
 const Home = () => {
   const [showPopup, setShowPopup] = useState(true)
-
-  // On componentDidMount set the timer
 
   useEffect(() => {
     const PopUpStatusChange = () => {
       setShowPopup(!showPopup)
     }
 
-    let timeId = setTimeout(() => {
+    const timeId = setTimeout(() => {
       PopUpStatusChange()
     }, 5000)
 
     return () => {
       clearTimeout(timeId)
     }
-  }, [])
+  }, [showPopup])
 
   const closePopup = () => {
     setShowPopup(true)
   }
 
   return (
-    <>
-      <header className='header'>
-        <h1 className='main-title'>Social App</h1>
-      </header>
+    <div>
+      <section className='flex-container'>
+        <header className='header'>
+          <h1 className='main-title'>Social App</h1>
+          <h3 className='welcome-section-header'>Do you want to join them?</h3>
+          <hr id='line-header' />
+        </header>
 
-      {showPopup ? '' : <Popup closePopup={closePopup} />}
-
-      <section className='welcome-section'>
-        <h3 className='welcome-section-header'>Do you want to join them?</h3>
-
-        <div className='feed-container'>
-          <figure className='main-feed'>[feed other users]</figure>
-        </div>
+        <section className='feed-section'>
+          <FeedNoLogin />
+        </section>
       </section>
 
-      <footer className='footer'>© 2022 by Jeziorna Urszula Inc.</footer>
-    </>
+      {showPopup ? '' : <Popup closePopup={closePopup} />}
+    </div>
   )
 }
 
