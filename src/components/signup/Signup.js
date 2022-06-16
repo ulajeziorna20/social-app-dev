@@ -1,8 +1,5 @@
-import React from 'react'
-import './Signup.css'
-
 const Signup = () => {
-  return <>I am signUP!</>
+  return <div>I am Signup</div>
 }
 
 export default Signup

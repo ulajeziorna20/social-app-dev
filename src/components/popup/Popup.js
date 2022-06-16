@@ -2,6 +2,8 @@ import './Popup.css'
 
 import { Link } from 'react-router-dom'
 
+import Login from '../login/Login'
+
 const Popup = (props) => {
   return (
     <>
@@ -11,19 +13,7 @@ const Popup = (props) => {
             close
           </div>
           <div className='popup-box solid'>
-            <form className='form'>
-              <h1 className='login-header'>Sign in!</h1>
-              <label htmlFor='userName'>Username</label>
-              <br />
-              <input type='text' name='userName' id='userName' className='login-box' />
-              <br />
-              <label htmlFor='password'>Password</label>
-              <br />
-              <input type='password' name='password' id='password' className='login-box' />
-              <br />
-              <br />
-              <input type='submit' value='LOGIN' className='login-btn' />
-            </form>
+            <Login isAuthenticated={props.isAuthenticated} isAuth={props.isAuth} />
             <Link to='/sign-up' className='link'>
               Sign Up!
             </Link>
