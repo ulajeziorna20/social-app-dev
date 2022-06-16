@@ -13,7 +13,7 @@ const Home = () => {
       setShowPopup(!showPopup)
     }
 
-    let timeId = setTimeout(() => {
+    const timeId = setTimeout(() => {
       PopUpStatusChange()
     }, 5000)
 

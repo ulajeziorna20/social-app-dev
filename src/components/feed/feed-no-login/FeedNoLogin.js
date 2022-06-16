@@ -6,10 +6,11 @@ import uniqueId from 'lodash.uniqueid'
 
 const FeedNoLogin = () => {
   const [feedNoLogin, setFeedNoLogin] = useState([])
-  const [loadNumber, setLoadNumber] = useState(1)
-  const [loading, setLoading] = useState(false)
+  // const [loadNumber, setLoadNumber] = useState(1)
+  const [loading, setLoading] = useState(true)
 
   const getData = () => {
+    // setLoadNumber((prevLoadNumber) => prevLoadNumber + 1)
     axios
       .post('https://akademia108.pl/api/social-app/post/latest', {
         mode: 'corse'
@@ -36,37 +37,11 @@ const FeedNoLogin = () => {
           feedNoLoginList.push(userFeedNoLogin)
         }
         setFeedNoLogin((prevData) => [...prevData, ...feedNoLoginList])
-        setLoading(true)
+        setLoading(false)
       })
   }
 
-  useEffect(() => {
-    getData()
-  }, [loadNumber])
-
-  //  Intersection observer
-
-  const loadNumberAdd = () => {
-    setLoadNumber((prevLoadNumber) => prevLoadNumber + 1)
-  }
-
-  const pageEnd = useRef()
-
-  useEffect(() => {
-    if (loading) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          if (entries[0].isIntersecting) {
-            loadNumberAdd()
-          }
-        },
-        { threshold: 1 }
-      )
-      observer.observe(pageEnd.current)
-    }
-  }, [loading])
-
-  let feedNoLoginList = feedNoLogin.map((userObj) => {
+  const feedNoLoginList = feedNoLogin.map((userObj) => {
     return (
       <figure className='post' key={uniqueId('prefix')}>
         <img id='post-avatar' src={userObj.user.avatar} alt='avatar' />
@@ -76,12 +51,33 @@ const FeedNoLogin = () => {
     )
   })
 
+  const pageEnd = useRef()
+
+  useEffect(() => {
+    if (loading) {
+      getData()
+    }
+  }, [loading])
+
+  useEffect(() => {
+    if (loading) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            setLoading(true)
+          }
+        },
+        { threshold: 1 }
+      )
+      observer.observe(pageEnd.current)
+    }
+  }, [loading])
+
   return (
     <div>
       <section className='post-box'>{feedNoLoginList}</section>
-      <div className='box'>
-        <div className='loader-box' ref={pageEnd}></div>
-      </div>
+      {loading && <div className='loader-box'></div>}
+      <div className='box' ref={pageEnd}></div>
     </div>
   )
 }
