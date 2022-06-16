@@ -2,13 +2,13 @@ import './App.css'
 
 import { useState } from 'react'
 
-import { Link, Navigate, Routes, Route } from 'react-router-dom'
+import { Link, Routes, Route } from 'react-router-dom'
 
 import Home from './components/home/Home'
 import HomeLoggedIn from './components/homeLoggedIn/HomeLoggedIn'
-import Login from './components/login/Login'
 import Logout from './components/logout/Logout'
 import Signup from './components/signup/Signup'
+import LoginPage from './pages/login-page/LoginPage'
 
 const App = () => {
   const [isAuth, setIsAuth] = useState(false)
@@ -32,7 +32,7 @@ const App = () => {
           </Link>
         </li>
         <li className='nav-item'>
-          <Link to='/login' className='link'>
+          <Link to='/loginPage' className='link'>
             Login
           </Link>
         </li>
@@ -53,11 +53,6 @@ const App = () => {
             HomeLogged
           </Link>
         </li>
-        <li className='nav-item'>
-          <Link to='/' className='link'>
-            myFollows
-          </Link>
-        </li>
       </ul>
     </nav>
   )
@@ -65,7 +60,6 @@ const App = () => {
   let routes = navUnloggedUsers
 
   const isAuthenticated = (response) => {
-    // console.log('callback z Loginu')
     if (response === 'accept') {
       setIsAuth(true)
     }
@@ -82,13 +76,11 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Home isAuthenticated={isAuthenticated} isAuth={isAuth} />} />
           <Route path='signup' element={<Signup />} />
-          <Route path='login' element={<Login isAuthenticated={isAuthenticated} isAuth={isAuth} />} />
+          <Route path='loginPage' element={<LoginPage isAuthenticated={isAuthenticated} isAuth={isAuth} />} />
           <Route path='homeLoggedIn' element={<HomeLoggedIn />} />
-          {/* <Route path='home' element={<Home />} /> */}
           <Route path='logout' element={<Logout />} />
         </Routes>
       </div>
-      {/* PRÓBA REDUX */}
     </div>
   )
 }

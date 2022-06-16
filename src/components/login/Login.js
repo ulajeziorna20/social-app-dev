@@ -37,13 +37,9 @@ const Login = (props) => {
       password: formData.password,
       username: formData.username
     }
-    console.log('jestem popup zapisuje')
 
     axios.post('https://akademia108.pl/api/social-app/user/login', postData, axiosConfig).then((res) => {
-      console.log(res)
-
-      if (res.data.error === false) {
-        console.log('jestem popup')
+      if (!res.data.error) {
         setDataLoggedUser({
           jwt: res.data.jwt_token,
           userName: res.data.username,
@@ -65,11 +61,10 @@ const Login = (props) => {
   }, [dataLoggedUser])
 
   useEffect(() => {
-    if (errorLogin === false) {
-      // console.log(props.isAuthenticated)
+    if (!errorLogin) {
       props.isAuthenticated('accept')
     }
-  }, [errorLogin])
+  }, [errorLogin, props])
 
   useEffect(() => {
     if (props.isAuth === false) {
@@ -121,16 +116,13 @@ const Login = (props) => {
         </div>
 
         <div className='container-bottom'>
-          <button type='button' className='cancelbtn'>
-            Cancel
-          </button>
           <span className='psw'>
             Forgot <a href='#'>password?</a>
           </span>
           <nav>
             <ul>
               <li className='nav-item'>
-                <Link to='/signup' className='link'>
+                <Link to='/sign-up' className='link'>
                   Sign Up!
                 </Link>
               </li>
@@ -138,7 +130,6 @@ const Login = (props) => {
           </nav>
         </div>
       </form>
-      {/* <Authenticated errorLogin={errorLogin} /> */}
     </div>
   )
 }

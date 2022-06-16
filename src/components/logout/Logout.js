@@ -1,4 +1,4 @@
-const Logout = (props) => {
+const Logout = () => {
   return <></>
 }
 
