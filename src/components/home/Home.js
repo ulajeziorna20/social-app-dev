@@ -20,7 +20,7 @@ const Home = () => {
     return () => {
       clearTimeout(timeId)
     }
-  }, [])
+  }, [showPopup])
 
   const closePopup = () => {
     setShowPopup(true)

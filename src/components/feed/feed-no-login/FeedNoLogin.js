@@ -6,11 +6,9 @@ import uniqueId from 'lodash.uniqueid'
 
 const FeedNoLogin = () => {
   const [feedNoLogin, setFeedNoLogin] = useState([])
-  // const [loadNumber, setLoadNumber] = useState(1)
   const [loading, setLoading] = useState(true)
 
   const getData = () => {
-    // setLoadNumber((prevLoadNumber) => prevLoadNumber + 1)
     axios
       .post('https://akademia108.pl/api/social-app/post/latest', {
         mode: 'corse'
@@ -60,18 +58,16 @@ const FeedNoLogin = () => {
   }, [loading])
 
   useEffect(() => {
-    if (loading) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          if (entries[0].isIntersecting) {
-            setLoading(true)
-          }
-        },
-        { threshold: 1 }
-      )
-      observer.observe(pageEnd.current)
-    }
-  }, [loading])
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setLoading(true)
+        }
+      },
+      { threshold: 1 }
+    )
+    observer.observe(pageEnd.current)
+  }, [])
 
   return (
     <div>
